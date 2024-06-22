@@ -1,4 +1,5 @@
-Time [min],Capstan speed [m/min],Preform feed rate [mm/min],Temperature [C],Tension [g],Preform Pressure [mBar],Diameter [mm],Diameter X [um],Diameter Y [um]
+Time,Capstan speed,Preform feed rate,Temperature,Tension,Preform Pressure,Diameter,Diameter X,Diameter Y
+[min],[m/min],[mm/min],[ºC],[g],[mBar],[mm],[um],[um]
 12.573666,9.852891,3.999684,199.694489,54.020504,-0.078695,301.000000,301.000000,300.000000
 12.586874,9.878390,4.004780,199.796490,52.184824,0.125259,302.000000,302.000000,302.000000
 12.600214,9.776392,4.014972,200.000490,54.020504,0.125259,302.000000,302.000000,303.000000
