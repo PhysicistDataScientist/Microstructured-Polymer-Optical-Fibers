@@ -13,8 +13,9 @@ Also, this code relate the samples specifications from "Samples Group Specificat
 
 To help with the analysis of the pulling process, I developed a Python code named "Pulling Control.py".
 In the file "Pulling Path Manager.txt" you shall pass the path location of the pulling data folder.
-There is one folder "E - 22" with example of different pulling bands ("Data Pulling Band A.txt", "Data Pulling Band B.txt" and "Data Pulling Band C.txt").
-So, you need to pass the folder location which will contains the folder "E - 22".
-A report on the pulling of the sample "E - 22" was elaborated and is available inside its folder as "Report.pdf".
+There is one folder "E - 21" with example of different pulling bands ("Data Pulling Band A.txt", "Data Pulling Band B.txt" and "Data Pulling Band C.txt").
+So, you need to pass the folder location which will contains the folder "E - 21".
+
+A report on the pulling of the sample "E - 21" was elaborated and is available inside its folder as "Report.pdf".
 
 A scientific paper about this fabrication process was published:
