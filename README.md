@@ -10,6 +10,7 @@ The specification of each group of sample are in "Samples Group Specifications.x
 
 To modify the archive "Samples Drying Chamber Control.xlsx" I created a python file "Samples Control.py", which I execute every time a change is made on a sample.
 Also, this code relate the samples specifications from "Samples Group Specifications.xlsx".
+The Excel sheets may be in the same folder and you need to pass the folder location to the file "Sample Path Manager.txt".
 
 To help with the analysis of the pulling process, I developed a Python code named "Pulling Control.py".
 In the file "Pulling Path Manager.txt" you shall pass the path location of the pulling data folder.
