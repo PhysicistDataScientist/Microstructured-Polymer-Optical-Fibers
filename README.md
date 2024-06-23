@@ -11,7 +11,7 @@ Additionally, I uploaded the Excel sheets related to the control of the samples 
 The control of samples on the drying chamber is made by using "Samples Drying Chamber.xlsx".
 The specification of each group of sample are in "Samples Group Specifications.xlsx".
 
-To modify the archive "Samples Drying Chamber Control.xlsx" I created a python file "Samples Control.py", which I execute every time a change is made on a sample.
+To modify the archive "Samples Drying Chamber.xlsx" I created a python file "Samples Control.py", which I execute every time a change is made on a sample.
 Also, this code relate the samples specifications from "Samples Group Specifications.xlsx".
 The Excel sheets may be in the same folder and you need to pass the folder location to the file "Sample Path Manager.txt".
 "Sample Path Manager.txt" shall be in the same folder as "Samples Control.py".
