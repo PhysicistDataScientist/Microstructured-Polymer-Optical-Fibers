@@ -14,13 +14,16 @@ The specification of each group of sample are in "Samples Group Specifications.x
 To modify the archive "Samples Drying Chamber Control.xlsx" I created a python file "Samples Control.py", which I execute every time a change is made on a sample.
 Also, this code relate the samples specifications from "Samples Group Specifications.xlsx".
 The Excel sheets may be in the same folder and you need to pass the folder location to the file "Sample Path Manager.txt".
+"Sample Path Manager.txt" shall be in the same folder as "Samples Control.py".
 
-To help with the analysis of the pulling process, I developed a Python code named "Pulling Analyser.py".
+To help with the analysis of the pulling process, I uploaded to the folder "Pulling Analyser" a Python code named "Pulling Analyser.py".
 In the file "Pulling Path Manager.txt" you shall pass the path location of the pulling data folder.
-This file should be in the same folder as "Pulling Analyser.py"
+This file should be in the same folder as "Pulling Analyser.py".
+
 There is one folder "E - 21" with example of different pulling bands ("Data Pulling Band A.txt", "Data Pulling Band B.txt" and "Data Pulling Band C.txt").
-So, you need to pass the folder location which will contains the folder "E - 21".
+You need to pass the location to "Pulling Path Manager.txt" in which will contains the folder "E - 21".
 
-A report on the pulling of the sample "E - 21" was elaborated and is available inside its folder as "Report.pdf".
+A report on the pulling results of the sample "E - 21" was elaborated and is available inside its folder as "Report.pdf".
 
-A scientific paper about this fabrication process was published:
+A scientific paper about this fabrication process was published: Eduardo A. V. Souza, Cristiano M. B. Cordeiro, "Developing Microstructured Polymer Optical Fibers
+for Sensing Applications". LAWOFS 2024.
