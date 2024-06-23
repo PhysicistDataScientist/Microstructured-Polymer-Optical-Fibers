@@ -2,9 +2,12 @@
 
 In this repository you will find scientific work involving microstructured polymer optical fibers.
 
-A manual to pull mPOFs using a drawing tower was elaborated and can be encountered here as "Manual.pdf".
+In the folder "General" you will find a manual to pull mPOFs using a drawing tower named "Manual.pdf". 
+Also, you can check the "Technical Drawing Pulling.pdf" and "Technical Drawing Workshop.pdf". 
+They are the technical drawings having the design of holes for a sample. 
+The first helps me during the pulling process and the second is to create the preform.
 
-Additionally, I submited the Excel sheets related to the control of the samples and their specifications.
+Additionally, I uploaded the Excel sheets related to the control of the samples and their specifications.
 The control of samples on the drying chamber is made by using "Samples Drying Chamber.xlsx".
 The specification of each group of sample are in "Samples Group Specifications.xlsx".
 
