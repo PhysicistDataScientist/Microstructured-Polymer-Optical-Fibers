@@ -7,13 +7,9 @@ Also, you can check the "Technical Drawing Pulling.pdf" and "Technical Drawing W
 They are the technical drawings having the design of holes for a sample. 
 The first helps me during the pulling process and the second is to create the preform.
 
-Additionally, I uploaded the Excel sheets related to the control of the samples and their specifications.
-The control of samples on the drying chamber is made by using "Samples Drying Chamber.xlsx".
-The specification of each group of sample are in "Samples Group Specifications.xlsx".
-
+Additionally, I uploaded an Excel sheet related to the control of the samples on the drying chambers named "Samples Drying Chamber.xlsx".
 To modify the archive "Samples Drying Chamber.xlsx" I created a python file "Samples Control.py", which I execute every time a change is made on a sample.
-Also, this code relate the samples specifications from "Samples Group Specifications.xlsx".
-The Excel sheets may be in the same folder and you need to pass the folder location to the file "Sample Path Manager.txt".
+The Excel sheet may be in the same folder and you need to pass the folder location to the file "Sample Path Manager.txt".
 "Sample Path Manager.txt" shall be in the same folder as "Samples Control.py".
 
 To help with the analysis of the pulling process, I uploaded to the folder "Pulling Analyser" a Python code named "Pulling Analyser.py".
