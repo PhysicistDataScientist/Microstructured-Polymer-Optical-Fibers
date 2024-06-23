@@ -1,2 +1,1 @@
-Create the Python code "Samples Control.py";
 Create a new version for the "Manual.pdf".
