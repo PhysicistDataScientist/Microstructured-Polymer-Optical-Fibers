@@ -1,6 +1,6 @@
-# Welcome to experiments on mPOFs!
+# Welcome to "Microstructured Polymer Optical Fibers"!
 
-In this repository you will find scientific work involving microstructured polymer optical fibers.
+In this repository you will find scientific work involving microstructured polymer optical fibers (mPOFs).
 
 In the folder "General" you will find the "Manual.pdf", what gives instructions on how to pull mPOFs using a drawing tower. 
 Also, you can check the technical drawings of a structured preform on "Technical Drawing Pulling.pdf" and "Technical Drawing Workshop.pdf". 
