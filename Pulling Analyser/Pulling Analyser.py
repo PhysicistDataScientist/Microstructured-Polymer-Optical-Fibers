@@ -20,7 +20,7 @@ class Band:
         self.df = DataFrame() # General data.
         self.df_stats = DataFrame() # Statistics. 
     # Individual analysis:
-    def individual_analysis(self, data_path, fig_tab, save):        
+    def individual_analysis(self, data_path, save):        
         self.df = read_csv(data_path, sep=',', decimal='.')
         while True:
             question = input(f'Do you want to select an interval of fiber band {self.band}? [y/n]')
@@ -28,64 +28,51 @@ class Band:
                 if question not in ['y', 'n']:
                     raise ValueError('Invalid answer!')
                 else:
+                    select_interval = question
                     break
             except ValueError as ve:
                 print(ve)
-        if question == 'y': # Will select a region.
+        if select_interval == 'y': # Will select a region.
             while True:
-                t_list = input('Give the time interval endpoints: [t_min,t_max]')
+                question = input('Give the time interval endpoints: [t_min,t_max]')
                 endpoints = list()
                 try:
-                    if t_list.count(',') != 1:
+                    if question.count(',') != 1:
                         raise ValueError('Mismatch of itens given!')
-                    t_min, t_max = t_list.split(',')
-                    for t in [t_min, t_max]:
-                        if not t.replace('.','').isdigit():
+                    aux_list = question.split(',')
+                    for aux in aux_list:
+                        if not aux.replace('.','').isdigit():
                             raise ValueError('Not a number!')
-                        t = float(t)
-                        if t < 0:
-                            raise ValueError('Negative time!')
-                        endpoints.append(t)
+                        endpoints.append(float(aux))
+                    t_min, t_max = endpoints
                 except ValueError as ve:
                     print(ve)
                 else:
                     break
-            self.df = self.df[self.df['Time [min]'] >= endpoints[0]]
-            self.df = self.df[self.df['Time [min]'] <= endpoints[1]]
-        else: # Won't select a region.
-            pass
+            self.df = self.df[self.df['Time [min]'] >= t_min]
+            self.df = self.df[self.df['Time [min]'] <= t_max]
+        # For each parameter:
         x = self.df.loc[:, 'Time [min]'].values
         for name in self.df.columns[1:]:
             y = self.df.loc[:, name].values
             if '[C]' in name:
                 name = name.replace('[C]', '[°C]')
             # Figure:
-            if fig_tab: # Will create the graphics:
-                fig, ax = subplots(nrows=1, ncols=1, layout='constrained', figsize=(6,4))
-                ax.set_xlabel(self.df.columns[0], loc='center', fontsize=12)
-                ax.set_ylabel(name, loc='center', fontsize=12)
-                ax.scatter(x, y, s=40, c='black')
-                graphic_name = f'Graphic Band {self.band} - ' + name.split('[')[0].strip() + '.png'
-                show()
-                if save: # Will save.
-                    fig.savefig(join(sample_folder, graphic_name))
-                else:
-                    pass # Won't save.
-            else: # Won't create the graphics.
-                pass
-        if fig_tab: # Will create the table:
-            self.df_stats = self.df.describe()
-            display(self.df_stats)
-            if save: # Will save:
-                table_name = f'Table Band {self.band}.xlsx'
-                with ExcelWriter(join(sample_folder, table_name), engine='openpyxl') as writer:
-                    self.df_stats.to_excel(writer)
-            else: # Won't save.
-                pass
-        else: # Won't create the table.
-            pass
+            fig, ax = subplots(nrows=1, ncols=1, layout='constrained', figsize=(6,4))
+            ax.set_xlabel(self.df.columns[0], loc='center', fontsize=12)
+            ax.set_ylabel(name, loc='center', fontsize=12)
+            ax.scatter(x, y, s=40, c='black')
+            show()
+            if save: 
+                fig.savefig(join(sample_folder, f'Band {self.band} - Graphic - {name.split('[')[0].strip()}.png'))
+        # Statistics:
+        self.df_stats = self.df.describe()
+        print(self.df_stats)
+        if save: # Will save:
+            with ExcelWriter(join(sample_folder, f'Band {self.band} - Table - Pulling Statistics.xlsx'), engine='openpyxl') as writer:
+                self.df_stats.to_excel(writer)
     # Comparison between bands of the same sample:
-    def compared_bands_analysis(objects, fig_tab, save):
+    def compared_bands_analysis(objects, save):
         # Get the columns to be compared:
         possible_names = [column.split('[')[0].rstrip() for column in objects[0].df.columns[1:]] 
         print(f'You can choose the following graphics for comparison:')
@@ -111,22 +98,18 @@ class Band:
                 else:
                     column = col
                     break
-            if fig_tab: # Will plot.
-                fig, ax = subplots(nrows=1, ncols=1, layout='constrained', figsize=(6,4))
-                ax.set_xlabel('Time [min]', loc='center', fontsize=12)
-                ax.set_ylabel(column, loc='center', fontsize=12)
-                for object in objects:
-                    x, y = object.df.loc[:, 'Time [min]'].values, object.df.loc[:, column].values
-                    ax.scatter(x, y, s=40, label=f'Band {object.band}')
-                ax.legend(loc='best', fontsize=10)
-                show()
-                bands_string = ','.join([object.band for object in objects])
-                if save: # Will save the plot.
-                    fig.savefig(join(sample_folder, 'Graphic Bands '+ bands_string + f' - {name}'))
-                else: # Won't save the plot.
-                    pass
-            else: # Won't plot.
-                pass
+            # Figure:
+            fig, ax = subplots(nrows=1, ncols=1, layout='constrained', figsize=(6,4))
+            ax.set_xlabel('Time [min]', loc='center', fontsize=12)
+            ax.set_ylabel(column, loc='center', fontsize=12)
+            for object in objects:
+                x, y = object.df.loc[:, 'Time [min]'].values, object.df.loc[:, column].values
+                ax.scatter(x, y, s=40, label=f'Band {object.band}')
+            ax.legend(loc='best', fontsize=10)
+            show()
+            bands_string = ','.join([object.band for object in objects])
+            if save:
+                fig.savefig(join(sample_folder, f'Bands {bands_string} - Graphic - {name}'))
 
 # Function:
 ## Introduction to the program:
@@ -187,41 +170,22 @@ def get_sample_folder():
         except FileExistsError as fee:
             print(fee)
 ## Decide if it is necessary to create plots, tables and saving them:
-def ask_create_save():
-    # Decide if it is necessary to create plots and tables:
+def ask_save():
+    # Aks if the user wants to save the graphics and tables:
     while True:
-        # Aks the operation mode:
-        question = input('Do you want to create plots and tables?: [y/n]')
+        question = input('Do you want to save plots and tables?: [y/n]')
         try:
             if question not in ['y', 'n']: # Invalid answer.
                 raise ValueError('Invalid answer!')
             elif question == 'y': # Positive answer.
-                fig_tab = True
+                save = True
             else: # Negative answer.
-                fig_tab = False 
+                save = False 
         except ValueError as ve: # It occured an error.
             print(ve)
         else: # It ran smoothly.
             break
-    # Decide if it is necessary to save plots and tables:
-    if fig_tab: # Will create.
-        while True:
-            # Aks the operation mode:
-            question = input('Do you want to save plots and tables?: [y/n]')
-            try:
-                if question not in ['y', 'n']: # Invalid answer.
-                    raise ValueError('Invalid answer!')
-                elif question == 'y': # Positive answer.
-                    save = True
-                else: # Negative answer.
-                    save = False 
-            except ValueError as ve: # It occured an error.
-                print(ve)
-            else: # It ran smoothly.
-                break
-    else: # Won't create.
-        save = False
-    return fig_tab, save
+    return save
 ## Select the bands to be analised:
 def select_bands_analyse(possible_bands):
     while True:
@@ -230,7 +194,7 @@ def select_bands_analyse(possible_bands):
         try:
             if ',' not in question: # One band.
                 if question == 'Trash':
-                    ExcelWriter.append(question)
+                    band_list.append(question)
                 elif (not question.isalpha()) or (not question.isupper() or (len(question) > 1)):
                     raise ValueError('Invalid band!')
                 elif question not in possible_bands:
@@ -269,9 +233,8 @@ def modify_file(data_path):
     with open(data_path, mode='rt', encoding=detection['encoding']) as f:
         rows = f.readlines()
         f.close()
+    file = data_path.split('\\')[-1]
     ## The file need to be modified:
-    file = data_path.split('Pulling')[1]
-    file = 'Pulling' + file
     if (header1 in rows) or (header2 in rows):
         # Identify the header (tractor/capstan speed):
         if header1 in rows:
@@ -373,19 +336,19 @@ def main():
         # Find sample folder:
         get_sample_folder()
         # Access files withing sample folder:
-        path_list = [file for file in listdir(sample_folder) if 'Data Pulling Band ' in file]
+        path_list = [file for file in listdir(sample_folder) if 'Data - Pulling' in file]
         # Decide if plotting and showing it is relevant:
-        fig_tab, save = ask_create_save()
+        save = ask_save()
         # Choose the bands to analyse:
         print('You can analyse the following fiber bands:')
-        possible_bands = [path.split('Band')[-1].split('.txt')[0].strip() for path in path_list]
+        possible_bands = [path.split('-')[0].replace('Band','').strip() for path in path_list]
         [print(pos_band) for pos_band in possible_bands]
         print()
         bands_to_analyse = select_bands_analyse(possible_bands)
         # Update the files to be analysed:
         new_path_list = list()
         for path in path_list:
-            label = path.split('Band')[-1].split('.txt')[0].strip()
+            label = path.split('-')[0].replace('Band','').strip()
             if label in bands_to_analyse:
                 new_path_list.append(path)
         path_list = new_path_list
@@ -400,10 +363,10 @@ def main():
             # Modify data files:
             modify_file(data_path)
             # Individual analysis:
-            band = path.split('Band')[-1].split('.txt')[0].strip()
+            band = path.split('-')[0].replace('Band','').strip()
             object = Band(band=band)
             if band in bands_to_analyse:
-                object.individual_analysis(data_path, fig_tab=fig_tab, save=save)
+                object.individual_analysis(data_path, save=save)
             else:
                 pass
             objects.append(object)
@@ -412,9 +375,7 @@ def main():
         if len(bands_to_compare) != 0: # Will compare.
             # Compare curves for selected files:
             objects_to_compare = [object for object in objects if object.band in bands_to_compare]
-            Band.compared_bands_analysis(objects_to_compare, fig_tab=fig_tab, save=save)
-        else: # Won't compare.
-            pass
+            Band.compared_bands_analysis(objects_to_compare, save=save)
         # Ask if the program shall be interrupted:
         stop = ask_stop()
 
