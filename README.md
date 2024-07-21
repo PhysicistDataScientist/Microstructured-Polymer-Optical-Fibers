@@ -17,6 +17,5 @@ This file should be in the same folder as "Pulling Analyser.py".
 
 There is one folder "E - 21" with example of different pulling bands ("Data Pulling Band A.txt", "Data Pulling Band B.txt" and "Data Pulling Band C.txt").
 You need to pass the location to "Pulling Path Manager.txt" in which will contains the folder "E - 21".
-A report on the pulling results of the sample "E - 21" was elaborated and is available inside its folder as "Report.pdf".
 
 A scientific paper about this repository analysis was published and can be accessed in https://ieeexplore.ieee.org/abstract/document/10560648?casa_token=8M7vaLN97ewAAAAA:UK_nWdh_bEQ2-33TGx_sRJk5CWOb5obSWx_9Qvz3P7tMnGzIPfgzdzxBOabnbepGBMI6RwoNR3IY.
