@@ -2,7 +2,7 @@
 
 Overview: Study on the fabrication process of microstructured polymer optical fibers (mPOFs).
 
-Files:
+Contents:
 - "E - 21": folder corresponding to one sample;
   - "Band X - Data - Pulling.txt": .csv styled pulling parameters;
 - "General": folder with the general procedures;
