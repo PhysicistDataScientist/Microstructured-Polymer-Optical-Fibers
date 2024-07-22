@@ -1,6 +1,11 @@
 # Welcome to "Microstructured Polymer Optical Fibers"!
 
-Overview: Study on the fabrication process of microstructured polymer optical fibers (mPOFs).
+Subject: Fabrication process of microstructured polymer optical fibers (mPOFs).
+
+Objectives:
+- Analyse the pulling parameters on the fabrication of mPOFs;
+- Control the sample's stage;
+- Monitor the sample's time on the drying chambers.
 
 Contents:
 - "E - 21": folder corresponding to one sample;
